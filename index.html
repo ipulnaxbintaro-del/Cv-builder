@@ -3,93 +3,119 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#17212b">
+<meta name="theme-color" content="#0b2f73">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="CV Builder">
 <link rel="manifest" href="manifest.webmanifest">
-<title>CV Builder</title>
+<title>CV Builder — Template Profesional</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f3f5f7;color:#17212b;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Arial,sans-serif}
-header{position:sticky;top:0;z-index:10;background:#17212b;color:#fff;padding:15px 16px calc(13px + env(safe-area-inset-top));font-weight:800}
-main{max-width:760px;margin:auto;padding:12px 12px 40px}.card{background:#fff;border-radius:14px;padding:15px;margin-bottom:12px;box-shadow:0 2px 10px #0001}
-h2{font-size:14px;margin:0 0 12px}label{font-size:11px;font-weight:700;display:block;margin:9px 0 4px}
-input,textarea{width:100%;font:inherit;font-size:15px;padding:11px;border:1px solid #ccd4da;border-radius:9px;background:#fff}textarea{min-height:90px;resize:vertical}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.item{border:1px solid #dde2e6;border-radius:10px;padding:11px;margin:9px 0}.itemhead{display:flex;justify-content:space-between;font-size:12px}
-button{border:0;border-radius:9px;padding:11px 13px;font-weight:800;font-size:13px}.add{width:100%;background:#edf1f4}.delete{background:#fff0f0;color:#b42318;padding:7px 9px}.primary{width:100%;background:#17212b;color:#fff;font-size:15px;padding:14px}.secondary{background:#e9edf1}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.status{text-align:center;color:#68737d;font-size:11px;min-height:18px;margin-top:8px}
-.preview{background:#e7eaed;padding:10px;overflow:auto;border-radius:10px}.paper{width:794px;min-height:1123px;background:#fff;margin:auto;padding:52px 58px;box-shadow:0 2px 12px #0002}
-.name{font-size:25px;font-weight:800}.contact{font-size:10px;color:#444;margin-top:5px}.sec{margin-top:20px}.title{font-size:11px;font-weight:800;letter-spacing:.5px;border-bottom:1.3px solid #222;padding-bottom:5px;margin-bottom:8px}.text{font-size:10px;line-height:1.45;white-space:pre-line;text-align:justify}.job{margin-bottom:12px}.jobtop{display:flex;justify-content:space-between;gap:12px}.company{font-size:10.5px;font-weight:800}.role{font-size:10px;font-weight:700;margin-top:2px}.date{font-size:9.5px;white-space:nowrap}.skill{font-size:10px;line-height:1.45;margin-bottom:4px}
-@media(max-width:600px){.grid{grid-template-columns:1fr}.paper{transform:scale(.43);transform-origin:top left;margin:0 0 -635px}.preview{height:500px}}
+:root{--blue:#0b2f73;--line:#123d8c;--muted:#6b7280;--bg:#f4f6f9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#111827;font-family:Arial,Helvetica,sans-serif}
+header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #dfe3e8;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{font-size:16px;font-weight:700}.topbtn{border:1px solid #cbd5e1;background:#fff;border-radius:7px;padding:9px 11px;font-weight:700}.pdfbtn{background:#0b4cc0;color:#fff;border-color:#0b4cc0}
+main{max-width:1180px;margin:auto;padding:14px;display:grid;grid-template-columns:360px 1fr;gap:14px}.panel{background:#fff;border:1px solid #e1e5ea;border-radius:8px;padding:13px;margin-bottom:12px}.panel h2{font-size:12px;color:var(--blue);margin:0 0 10px;border-bottom:3px solid var(--blue);padding-bottom:7px;text-transform:uppercase}
+label{display:block;font-size:10px;font-weight:700;margin:8px 0 4px}input,textarea{width:100%;border:1px solid #cfd6df;border-radius:6px;padding:9px;font:inherit;font-size:13px}textarea{min-height:86px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.photoWrap{text-align:center}.photoCircle{width:118px;height:118px;border:2px solid var(--blue);border-radius:50%;overflow:hidden;margin:3px auto 8px;display:flex;align-items:center;justify-content:center;background:#fff}.photoCircle img{width:100%;height:100%;object-fit:cover}.photoPlaceholder{font-size:11px;color:#777;padding:20px}.photoActions{display:flex;justify-content:center;gap:6px}.smallbtn{font-size:11px;padding:7px 10px;border:1px solid #8fb0e6;background:#fff;border-radius:6px;color:var(--blue);font-weight:700}
+.item{border:1px solid #e0e5ea;border-radius:7px;padding:9px;margin:8px 0}.itemhead{display:flex;justify-content:space-between;align-items:center;font-size:11px}.del{border:1px solid #f0a0a0;background:#fff;color:#c62828;border-radius:5px;padding:5px 7px;font-size:10px}.add{width:100%;border:1px solid #8fb0e6;background:#fff;color:#0b4cc0;border-radius:6px;padding:9px;font-weight:700}
+.paperbox{background:#e9edf2;padding:12px;overflow:auto;border-radius:8px}.paper{width:794px;min-height:1123px;background:#fff;margin:auto;padding:46px 52px;box-shadow:0 2px 12px #0002}
+.head{display:grid;grid-template-columns:118px 1fr;gap:25px;align-items:center;margin-bottom:18px}.cvphoto{width:112px;height:112px;border-radius:50%;border:2px solid var(--blue);overflow:hidden}.cvphoto img{width:100%;height:100%;object-fit:cover}.cvname{font-size:24px;font-weight:700;color:#000;letter-spacing:.1px}.contact{font-size:9.5px;margin-top:6px;line-height:1.6}.email{color:#06f}
+.sec{margin-top:17px}.sectitle{color:var(--blue);font-size:11px;font-weight:700;border-bottom:2px solid var(--blue);padding-bottom:4px;margin-bottom:8px}.body{font-size:9px;line-height:1.45;text-align:justify}.job{margin-bottom:11px}.jobtop{display:grid;grid-template-columns:1fr auto;gap:12px}.company{font-size:9.5px;font-weight:700}.date{font-size:8.8px;text-align:right;white-space:nowrap}.role{font-size:9px;font-style:italic;margin:2px 0 4px}.bullets{margin:0;padding-left:16px;font-size:9px;line-height:1.42}.bullets li{margin:1.5px 0}.edu{margin-bottom:8px}.skill{font-size:9px;line-height:1.45;margin-bottom:6px}
+.notice{text-align:center;color:#6b7280;font-size:10px;margin:7px}.full{width:100%}
+@media(max-width:800px){main{display:block;padding:8px}.paper{transform:scale(.45);transform-origin:top left;margin:0 0 -620px}.paperbox{height:520px}.topbtn{font-size:11px;padding:8px}.brand{font-size:14px}}
 </style>
 </head>
 <body>
-<header>CV Builder</header>
+<header>
+<div class="brand">CV Builder — Template Profesional</div>
+<div style="display:flex;gap:6px"><button class="topbtn" onclick="loadDraft()">Muat Draft</button><button class="topbtn" onclick="saveDraft()">Simpan Draft</button><button class="topbtn pdfbtn" onclick="generatePDF()">Generate PDF</button></div>
+</header>
 <main>
-<section class="card">
-<h2>Data Pribadi</h2>
-<label>Nama lengkap</label><input id="name" placeholder="Nama lengkap">
-<div class="grid"><div><label>Kota, Provinsi</label><input id="city" placeholder="Bekasi, Jawa Barat"></div><div><label>No. HP</label><input id="phone" placeholder="08xxxxxxxxxx"></div></div>
-<label>Email</label><input id="email" placeholder="nama@email.com">
-<label>Ringkasan Profesional</label><textarea id="summary" placeholder="Tulis ringkasan profesional..."></textarea>
+<div>
+<section class="panel">
+<h2>1. Data Pribadi</h2>
+<div class="photoWrap"><div class="photoCircle" id="photoCircle"><span class="photoPlaceholder">Foto Profil<br>(Lingkaran)</span></div>
+<div class="photoActions"><button class="smallbtn" onclick="$('#photo').click()">Ganti Foto</button><button class="smallbtn" onclick="removePhoto()">Hapus</button></div>
+<input id="photo" type="file" accept="image/*" hidden></div>
+<label>Nama Lengkap *</label><input id="name">
+<div class="row"><div><label>Kota *</label><input id="city"></div><div><label>No. HP *</label><input id="phone"></div></div>
+<label>Email *</label><input id="email">
 </section>
-<section class="card"><h2>Pengalaman Kerja</h2><div id="jobs"></div><button class="add" onclick="addJob()">＋ Tambah Pengalaman</button></section>
-<section class="card"><h2>Pendidikan</h2><div id="education"></div><button class="add" onclick="addEdu()">＋ Tambah Pendidikan</button></section>
-<section class="card"><h2>Keahlian & Kompetensi</h2><textarea id="skills" placeholder="Satu kategori per baris..."></textarea></section>
-<section class="card">
-<div class="actions"><button class="secondary" onclick="saveDraft()">Simpan Draft</button><button class="secondary" onclick="loadDraft()">Muat Draft</button></div>
-<button class="primary" style="margin-top:8px" onclick="generatePDF()">⬇️ Generate PDF</button>
-<div class="status" id="status"></div>
+<section class="panel"><h2>2. Ringkasan Profesional</h2><textarea id="summary"></textarea></section>
+<section class="panel"><h2>3. Pengalaman Kerja</h2><div id="jobs"></div><button class="add" onclick="addJob()">＋ Tambah Pengalaman</button></section>
+<section class="panel"><h2>4. Pendidikan</h2><div id="education"></div><button class="add" onclick="addEdu()">＋ Tambah Pendidikan</button></section>
+<section class="panel"><h2>5. Keahlian & Kompetensi</h2><div id="skills"></div><button class="add" onclick="addSkill()">＋ Tambah Kompetensi</button></section>
+</div>
+<div>
+<section class="panel"><h2>Preview CV (Real-time)</h2><div class="paperbox"><div class="paper" id="paper"></div></div>
+<div class="notice">Semua data tersimpan di perangkat Anda (localStorage). Data tidak dikirim ke server.</div>
+<div style="display:flex;gap:8px"><button class="topbtn full" onclick="saveDraft()">Simpan Draft</button><button class="topbtn full pdfbtn" onclick="generatePDF()">Generate PDF</button></div>
 </section>
-<section class="card"><h2>Preview</h2><div class="preview"><div class="paper" id="paper"></div></div></section>
+</div>
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
 <script>
-const $=id=>document.getElementById(id);let jobs=[],education=[];
+const $=id=>document.getElementById(id);
+let jobs=[], education=[], skills=[], photoData="";
 const esc=s=>String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
-function addJob(v={}){jobs.push(v);editors();render()} function addEdu(v={}){education.push(v);editors();render()}
-function delJob(i){jobs.splice(i,1);editors();render()} function delEdu(i){education.splice(i,1);render()}
+const lines=s=>String(s||"").split(/\\n|•/).map(x=>x.trim()).filter(Boolean);
+function addJob(v={}){jobs.push(v);editors();render()}
+function addEdu(v={}){education.push(v);editors();render()}
+function addSkill(v={}){skills.push(v);editors();render()}
+function del(type,i){(type==="job"?jobs:type==="edu"?education:skills).splice(i,1);editors();render()}
 function editors(){
-$("jobs").innerHTML=jobs.map((j,i)=>`<div class="item"><div class="itemhead"><b>Pengalaman ${i+1}</b><button class="delete" onclick="delJob(${i})">Hapus</button></div>
-<label>Perusahaan</label><input value="${esc(j.company)}" oninput="jobs[${i}].company=this.value;render()">
-<div class="grid"><div><label>Periode</label><input value="${esc(j.date)}" oninput="jobs[${i}].date=this.value;render()"></div><div><label>Posisi</label><input value="${esc(j.role)}" oninput="jobs[${i}].role=this.value;render()"></div></div>
-<label>Deskripsi pekerjaan</label><textarea oninput="jobs[${i}].desc=this.value;render()">${esc(j.desc)}</textarea></div>`).join("");
-$("education").innerHTML=education.map((e,i)=>`<div class="item"><div class="itemhead"><b>Pendidikan ${i+1}</b><button class="delete" onclick="delEdu(${i})">Hapus</button></div>
-<label>Institusi</label><input value="${esc(e.school)}" oninput="education[${i}].school=this.value;render()">
-<div class="grid"><div><label>Periode</label><input value="${esc(e.date)}" oninput="education[${i}].date=this.value;render()"></div><div><label>Jurusan</label><input value="${esc(e.major)}" oninput="education[${i}].major=this.value;render()"></div></div>
+$("jobs").innerHTML=jobs.map((j,i)=>`<div class="item"><div class="itemhead"><b>Pengalaman ${i+1}</b><button class="del" onclick="del('job',${i})">Hapus</button></div>
+<label>Nama Perusahaan *</label><input value="${esc(j.company)}" oninput="jobs[${i}].company=this.value;render()">
+<label>Periode *</label><input value="${esc(j.date)}" oninput="jobs[${i}].date=this.value;render()">
+<label>Posisi</label><input value="${esc(j.role)}" oninput="jobs[${i}].role=this.value;render()">
+<label>Deskripsi Pekerjaan</label><textarea oninput="jobs[${i}].desc=this.value;render()">${esc(j.desc)}</textarea></div>`).join("");
+$("education").innerHTML=education.map((e,i)=>`<div class="item"><div class="itemhead"><b>Pendidikan ${i+1}</b><button class="del" onclick="del('edu',${i})">Hapus</button></div>
+<label>Nama Sekolah *</label><input value="${esc(e.school)}" oninput="education[${i}].school=this.value;render()">
+<label>Periode</label><input value="${esc(e.date)}" oninput="education[${i}].date=this.value;render()">
+<label>Jurusan</label><input value="${esc(e.major)}" oninput="education[${i}].major=this.value;render()">
 <label>Keterangan</label><textarea oninput="education[${i}].note=this.value;render()">${esc(e.note)}</textarea></div>`).join("");
+$("skills").innerHTML=skills.map((s,i)=>`<div class="item"><div class="itemhead"><b>Kompetensi ${i+1}</b><button class="del" onclick="del('skill',${i})">Hapus</button></div>
+<label>Judul</label><input value="${esc(s.title)}" oninput="skills[${i}].title=this.value;render()">
+<label>Deskripsi</label><textarea oninput="skills[${i}].desc=this.value;render()">${esc(s.desc)}</textarea></div>`).join("");
 }
 function render(){
-let j=jobs.filter(x=>x.company||x.role||x.desc).map(x=>`<div class="job"><div class="jobtop"><div><div class="company">${esc(x.company)}</div><div class="role">${esc(x.role)}</div></div><div class="date">${esc(x.date)}</div></div><div class="text">${esc(x.desc)}</div></div>`).join("");
-let e=education.filter(x=>x.school||x.major||x.note).map(x=>`<div class="job"><div class="jobtop"><div><div class="company">${esc(x.school)}</div><div class="role">${esc(x.major)}</div></div><div class="date">${esc(x.date)}</div></div><div class="text">${esc(x.note)}</div></div>`).join("");
-let s=esc($("skills").value).split("\n").filter(Boolean).map(x=>`<div class="skill">${x}</div>`).join("");
-$("paper").innerHTML=`<div class="name">${esc($("name").value)||"NAMA LENGKAP"}</div><div class="contact">${esc($("city").value)}${$("city").value?" | ":""}${esc($("phone").value)}${$("phone").value?" | ":""}${esc($("email").value)}</div>
-<div class="sec"><div class="title">RINGKASAN PROFESIONAL</div><div class="text">${esc($("summary").value)}</div></div>
-<div class="sec"><div class="title">PENGALAMAN KERJA</div>${j||'<div class="text">Belum ada pengalaman.</div>'}</div>
-<div class="sec"><div class="title">PENDIDIKAN</div>${e||'<div class="text">Belum ada pendidikan.</div>'}</div>
-<div class="sec"><div class="title">KEAHLIAN & KOMPETENSI</div>${s||'<div class="text">Belum ada keahlian.</div>'}</div>`;
+$("photoCircle").innerHTML=photoData?`<img src="${photoData}">`:`<span class="photoPlaceholder">Foto Profil<br>(Lingkaran)</span>`;
+let jobsHtml=jobs.filter(j=>j.company||j.role||j.desc).map(j=>`<div class="job"><div class="jobtop"><div class="company">${esc(j.company)}</div><div class="date">${esc(j.date)}</div></div><div class="role">${esc(j.role)}</div><ul class="bullets">${lines(j.desc).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
+let eduHtml=education.filter(e=>e.school||e.major||e.note).map(e=>`<div class="edu"><div class="jobtop"><div class="company">${esc(e.school)}</div><div class="date">${esc(e.date)}</div></div><div class="role">${esc(e.major)}</div><ul class="bullets">${lines(e.note).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
+let skillsHtml=skills.filter(s=>s.title||s.desc).map(s=>`<div class="skill">• <b>${esc(s.title)}</b>: ${esc(s.desc)}</div>`).join("");
+$("paper").innerHTML=`<div class="head"><div class="cvphoto">${photoData?`<img src="${photoData}">`:""}</div><div><div class="cvname">${esc($("name").value)||"NAMA LENGKAP"}</div><div class="contact">${esc($("city").value)}${$("city").value?" | ":""}${esc($("phone").value)}${$("phone").value?" | ":""}<span class="email">${esc($("email").value)}</span></div></div></div>
+<div class="sec"><div class="sectitle">RINGKASAN PROFESIONAL</div><div class="body">${esc($("summary").value)}</div></div>
+<div class="sec"><div class="sectitle">PENGALAMAN KERJA</div>${jobsHtml}</div>
+<div class="sec"><div class="sectitle">PENDIDIKAN</div>${eduHtml}</div>
+<div class="sec"><div class="sectitle">KEAHLIAN & KOMPETENSI</div>${skillsHtml}</div>`;
 }
-function payload(){return {name:$("name").value,city:$("city").value,phone:$("phone").value,email:$("email").value,summary:$("summary").value,skills:$("skills").value,jobs,education}}
-function saveDraft(){localStorage.cvBuilderDraft=JSON.stringify(payload());$("status").textContent="Draft tersimpan di iPhone."}
-function loadDraft(){let x=localStorage.cvBuilderDraft;if(!x){$("status").textContent="Belum ada draft.";return}let d=JSON.parse(x);["name","city","phone","email","summary","skills"].forEach(k=>$(k).value=d[k]||"");jobs=d.jobs||[];education=d.education||[];editors();render();$("status").textContent="Draft dimuat."}
-function wrap(doc,text,x,y,w,size=8.5,lead=4){doc.setFontSize(size);let lines=doc.splitTextToSize(text||"",w);doc.text(lines,x,y);return y+lines.length*lead}
-function sec(doc,title,y){doc.setFont("helvetica","bold");doc.setFontSize(9);doc.text(title,15,y);doc.line(15,y+2,195,y+2);return y+8}
+function data(){return {name:$("name").value,city:$("city").value,phone:$("phone").value,email:$("email").value,summary:$("summary").value,jobs,education,skills,photoData}}
+function saveDraft(){localStorage.cvBuilderFinal=JSON.stringify(data());alert("Draft tersimpan di iPhone.")}
+function loadDraft(){let x=localStorage.cvBuilderFinal;if(!x){alert("Belum ada draft.");return}let d=JSON.parse(x);["name","city","phone","email","summary"].forEach(k=>$(k).value=d[k]||"");jobs=d.jobs||[];education=d.education||[];skills=d.skills||[];photoData=d.photoData||"";editors();render()}
+function removePhoto(){photoData="";render()}
+$("photo").addEventListener("change",e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{photoData=r.result;render()};r.readAsDataURL(f)});
+document.querySelectorAll("input:not(#photo),textarea").forEach(x=>x.addEventListener("input",render));
+function wrap(doc,text,x,y,w,size=8.6,leading=4){doc.setFontSize(size);let a=doc.splitTextToSize(text||"",w);doc.text(a,x,y);return y+a.length*leading}
+function heading(doc,t,y){doc.setTextColor(11,47,115);doc.setFont("helvetica","bold");doc.setFontSize(10);doc.text(t,15,y);doc.setDrawColor(11,47,115);doc.setLineWidth(.6);doc.line(15,y+2,195,y+2);return y+8}
 async function generatePDF(){
-$("status").textContent="Membuat PDF...";
-if(!window.jspdf){$("status").textContent="Generator PDF belum termuat. Buka saat internet aktif.";return}
-try{
-const {jsPDF}=window.jspdf,doc=new jsPDF({unit:"mm",format:"a4"});let y=18,w=180;
-doc.setFont("helvetica","bold");doc.setFontSize(18);doc.text($("name").value||"NAMA LENGKAP",15,y);y+=5;
-doc.setFont("helvetica","normal");doc.setFontSize(8);doc.text([$("city").value,$("phone").value,$("email").value].filter(Boolean).join(" | "),15,y);y+=8;
-y=sec(doc,"RINGKASAN PROFESIONAL",y);y=wrap(doc,$("summary").value,15,y,w)+3;
-y=sec(doc,"PENGALAMAN KERJA",y);
-for(const j of jobs){if(!(j.company||j.role||j.desc))continue;doc.setFont("helvetica","bold");doc.setFontSize(8.5);doc.text(j.company||"",15,y);doc.setFont("helvetica","normal");doc.setFontSize(7.5);doc.text(j.date||"",195,y,{align:"right"});y+=4;doc.setFont("helvetica","bold");doc.setFontSize(8);doc.text(j.role||"",15,y);y+=4;y=wrap(doc,j.desc,15,y,w,8,4)+3;if(y>278){doc.addPage();y=18}}
-y=sec(doc,"PENDIDIKAN",y);
-for(const e of education){if(!(e.school||e.major||e.note))continue;doc.setFont("helvetica","bold");doc.setFontSize(8.5);doc.text(e.school||"",15,y);doc.setFont("helvetica","normal");doc.setFontSize(7.5);doc.text(e.date||"",195,y,{align:"right"});y+=4;doc.setFont("helvetica","bold");doc.setFontSize(8);doc.text(e.major||"",15,y);y+=4;y=wrap(doc,e.note,15,y,w,8,4)+3;if(y>278){doc.addPage();y=18}}
-y=sec(doc,"KEAHLIAN & KOMPETENSI",y);
-for(const s of $("skills").value.split("\n"))if(s.trim()){y=wrap(doc,s,15,y,w,8,4)+1;if(y>278){doc.addPage();y=18}}
-let fn=(($("name").value||"CV").replace(/[^A-Za-z0-9_-]+/g,"_")||"CV")+"_CV.pdf";doc.save(fn);$("status").textContent="PDF berhasil dibuat. Buka menu Download/Files di iPhone.";
-}catch(e){$("status").textContent="Gagal membuat PDF: "+e.message}}
-document.querySelectorAll("input,textarea").forEach(x=>x.addEventListener("input",render));addJob();addEdu();render();
-if("serviceWorker" in navigator) window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js"));
+if(!window.jspdf){alert("Generator PDF belum termuat. Buka saat internet aktif sekali, lalu coba lagi.");return}
+const {jsPDF}=window.jspdf,doc=new jsPDF({unit:"mm",format:"a4"});let y=17;
+if(photoData)try{doc.addImage(photoData,"JPEG",15,y,30,30)}catch(e){}
+doc.setDrawColor(11,47,115);doc.setLineWidth(.6);doc.circle(30,y+15,15);
+doc.setTextColor(0,0,0);doc.setFont("helvetica","bold");doc.setFontSize(18);doc.text($("name").value||"NAMA LENGKAP",50,y+11);
+doc.setFont("helvetica","normal");doc.setFontSize(8.5);doc.text([$("city").value,$("phone").value].filter(Boolean).join(" | "),50,y+17);
+doc.setTextColor(0,102,255);doc.text($("email").value||"",50,y+22);doc.setTextColor(0,0,0);y+=38;
+y=heading(doc,"RINGKASAN PROFESIONAL",y);y=wrap(doc,$("summary").value,15,y,180)+4;
+y=heading(doc,"PENGALAMAN KERJA",y);
+for(const j of jobs){if(!(j.company||j.role||j.desc))continue;doc.setFont("helvetica","bold");doc.setFontSize(8.7);doc.text(j.company||"",15,y);doc.setFont("helvetica","normal");doc.setFontSize(8);doc.text(j.date||"",195,y,{align:"right"});y+=4;doc.setFont("helvetica","italic");doc.text(j.role||"",15,y);y+=4;for(const b of lines(j.desc)){doc.setFont("helvetica","normal");y=wrap(doc,"• "+b,18,y,177,8.2,3.8)+.5}y+=3;if(y>278){doc.addPage();y=18}}
+y=heading(doc,"PENDIDIKAN",y);
+for(const e of education){if(!(e.school||e.major||e.note))continue;doc.setFont("helvetica","bold");doc.setFontSize(8.7);doc.text(e.school||"",15,y);doc.setFont("helvetica","normal");doc.setFontSize(8);doc.text(e.date||"",195,y,{align:"right"});y+=4;doc.setFont("helvetica","italic");doc.text(e.major||"",15,y);y+=4;for(const b of lines(e.note)){doc.setFont("helvetica","normal");y=wrap(doc,"• "+b,18,y,177,8.2,3.8)+.5}y+=3;if(y>278){doc.addPage();y=18}}
+y=heading(doc,"KEAHLIAN & KOMPETENSI",y);
+for(const s of skills){if(!(s.title||s.desc))continue;y=wrap(doc,"• "+(s.title? s.title+": ":"")+s.desc,18,y,177,8.2,4)+1;if(y>278){doc.addPage();y=18}}
+let fn=(($("name").value||"CV").replace(/[^A-Za-z0-9_-]+/g,"_")||"CV")+"_CV.pdf";doc.save(fn)
+}
+if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+addJob();addEdu();addSkill();render();
 </script>
-</body></html>
+</body>
+</html>
