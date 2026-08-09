@@ -1,0 +1,9 @@
+{
+  "name":"CV Builder",
+  "short_name":"CV Builder",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#f3f5f7",
+  "theme_color":"#17212b",
+  "lang":"id"
+}

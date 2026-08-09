@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#17212b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="CV Builder">
+<link rel="manifest" href="manifest.webmanifest">
+<title>CV Builder</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f5f7;color:#17212b;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Arial,sans-serif}
+header{position:sticky;top:0;z-index:10;background:#17212b;color:#fff;padding:15px 16px calc(13px + env(safe-area-inset-top));font-weight:800}
+main{max-width:760px;margin:auto;padding:12px 12px 40px}.card{background:#fff;border-radius:14px;padding:15px;margin-bottom:12px;box-shadow:0 2px 10px #0001}
+h2{font-size:14px;margin:0 0 12px}label{font-size:11px;font-weight:700;display:block;margin:9px 0 4px}
+input,textarea{width:100%;font:inherit;font-size:15px;padding:11px;border:1px solid #ccd4da;border-radius:9px;background:#fff}textarea{min-height:90px;resize:vertical}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.item{border:1px solid #dde2e6;border-radius:10px;padding:11px;margin:9px 0}.itemhead{display:flex;justify-content:space-between;font-size:12px}
+button{border:0;border-radius:9px;padding:11px 13px;font-weight:800;font-size:13px}.add{width:100%;background:#edf1f4}.delete{background:#fff0f0;color:#b42318;padding:7px 9px}.primary{width:100%;background:#17212b;color:#fff;font-size:15px;padding:14px}.secondary{background:#e9edf1}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.status{text-align:center;color:#68737d;font-size:11px;min-height:18px;margin-top:8px}
+.preview{background:#e7eaed;padding:10px;overflow:auto;border-radius:10px}.paper{width:794px;min-height:1123px;background:#fff;margin:auto;padding:52px 58px;box-shadow:0 2px 12px #0002}
+.name{font-size:25px;font-weight:800}.contact{font-size:10px;color:#444;margin-top:5px}.sec{margin-top:20px}.title{font-size:11px;font-weight:800;letter-spacing:.5px;border-bottom:1.3px solid #222;padding-bottom:5px;margin-bottom:8px}.text{font-size:10px;line-height:1.45;white-space:pre-line;text-align:justify}.job{margin-bottom:12px}.jobtop{display:flex;justify-content:space-between;gap:12px}.company{font-size:10.5px;font-weight:800}.role{font-size:10px;font-weight:700;margin-top:2px}.date{font-size:9.5px;white-space:nowrap}.skill{font-size:10px;line-height:1.45;margin-bottom:4px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.paper{transform:scale(.43);transform-origin:top left;margin:0 0 -635px}.preview{height:500px}}
+</style>
+</head>
+<body>
+<header>CV Builder</header>
+<main>
+<section class="card">
+<h2>Data Pribadi</h2>
+<label>Nama lengkap</label><input id="name" placeholder="Nama lengkap">
+<div class="grid"><div><label>Kota, Provinsi</label><input id="city" placeholder="Bekasi, Jawa Barat"></div><div><label>No. HP</label><input id="phone" placeholder="08xxxxxxxxxx"></div></div>
+<label>Email</label><input id="email" placeholder="nama@email.com">
+<label>Ringkasan Profesional</label><textarea id="summary" placeholder="Tulis ringkasan profesional..."></textarea>
+</section>
+<section class="card"><h2>Pengalaman Kerja</h2><div id="jobs"></div><button class="add" onclick="addJob()">＋ Tambah Pengalaman</button></section>
+<section class="card"><h2>Pendidikan</h2><div id="education"></div><button class="add" onclick="addEdu()">＋ Tambah Pendidikan</button></section>
+<section class="card"><h2>Keahlian & Kompetensi</h2><textarea id="skills" placeholder="Satu kategori per baris..."></textarea></section>
+<section class="card">
+<div class="actions"><button class="secondary" onclick="saveDraft()">Simpan Draft</button><button class="secondary" onclick="loadDraft()">Muat Draft</button></div>
+<button class="primary" style="margin-top:8px" onclick="generatePDF()">⬇️ Generate PDF</button>
+<div class="status" id="status"></div>
+</section>
+<section class="card"><h2>Preview</h2><div class="preview"><div class="paper" id="paper"></div></div></section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+<script>
+const $=id=>document.getElementById(id);let jobs=[],education=[];
+const esc=s=>String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
+function addJob(v={}){jobs.push(v);editors();render()} function addEdu(v={}){education.push(v);editors();render()}
+function delJob(i){jobs.splice(i,1);editors();render()} function delEdu(i){education.splice(i,1);render()}
+function editors(){
+$("jobs").innerHTML=jobs.map((j,i)=>`<div class="item"><div class="itemhead"><b>Pengalaman ${i+1}</b><button class="delete" onclick="delJob(${i})">Hapus</button></div>
+<label>Perusahaan</label><input value="${esc(j.company)}" oninput="jobs[${i}].company=this.value;render()">
+<div class="grid"><div><label>Periode</label><input value="${esc(j.date)}" oninput="jobs[${i}].date=this.value;render()"></div><div><label>Posisi</label><input value="${esc(j.role)}" oninput="jobs[${i}].role=this.value;render()"></div></div>
+<label>Deskripsi pekerjaan</label><textarea oninput="jobs[${i}].desc=this.value;render()">${esc(j.desc)}</textarea></div>`).join("");
+$("education").innerHTML=education.map((e,i)=>`<div class="item"><div class="itemhead"><b>Pendidikan ${i+1}</b><button class="delete" onclick="delEdu(${i})">Hapus</button></div>
+<label>Institusi</label><input value="${esc(e.school)}" oninput="education[${i}].school=this.value;render()">
+<div class="grid"><div><label>Periode</label><input value="${esc(e.date)}" oninput="education[${i}].date=this.value;render()"></div><div><label>Jurusan</label><input value="${esc(e.major)}" oninput="education[${i}].major=this.value;render()"></div></div>
+<label>Keterangan</label><textarea oninput="education[${i}].note=this.value;render()">${esc(e.note)}</textarea></div>`).join("");
+}
+function render(){
+let j=jobs.filter(x=>x.company||x.role||x.desc).map(x=>`<div class="job"><div class="jobtop"><div><div class="company">${esc(x.company)}</div><div class="role">${esc(x.role)}</div></div><div class="date">${esc(x.date)}</div></div><div class="text">${esc(x.desc)}</div></div>`).join("");
+let e=education.filter(x=>x.school||x.major||x.note).map(x=>`<div class="job"><div class="jobtop"><div><div class="company">${esc(x.school)}</div><div class="role">${esc(x.major)}</div></div><div class="date">${esc(x.date)}</div></div><div class="text">${esc(x.note)}</div></div>`).join("");
+let s=esc($("skills").value).split("\n").filter(Boolean).map(x=>`<div class="skill">${x}</div>`).join("");
+$("paper").innerHTML=`<div class="name">${esc($("name").value)||"NAMA LENGKAP"}</div><div class="contact">${esc($("city").value)}${$("city").value?" | ":""}${esc($("phone").value)}${$("phone").value?" | ":""}${esc($("email").value)}</div>
+<div class="sec"><div class="title">RINGKASAN PROFESIONAL</div><div class="text">${esc($("summary").value)}</div></div>
+<div class="sec"><div class="title">PENGALAMAN KERJA</div>${j||'<div class="text">Belum ada pengalaman.</div>'}</div>
+<div class="sec"><div class="title">PENDIDIKAN</div>${e||'<div class="text">Belum ada pendidikan.</div>'}</div>
+<div class="sec"><div class="title">KEAHLIAN & KOMPETENSI</div>${s||'<div class="text">Belum ada keahlian.</div>'}</div>`;
+}
+function payload(){return {name:$("name").value,city:$("city").value,phone:$("phone").value,email:$("email").value,summary:$("summary").value,skills:$("skills").value,jobs,education}}
+function saveDraft(){localStorage.cvBuilderDraft=JSON.stringify(payload());$("status").textContent="Draft tersimpan di iPhone."}
+function loadDraft(){let x=localStorage.cvBuilderDraft;if(!x){$("status").textContent="Belum ada draft.";return}let d=JSON.parse(x);["name","city","phone","email","summary","skills"].forEach(k=>$(k).value=d[k]||"");jobs=d.jobs||[];education=d.education||[];editors();render();$("status").textContent="Draft dimuat."}
+function wrap(doc,text,x,y,w,size=8.5,lead=4){doc.setFontSize(size);let lines=doc.splitTextToSize(text||"",w);doc.text(lines,x,y);return y+lines.length*lead}
+function sec(doc,title,y){doc.setFont("helvetica","bold");doc.setFontSize(9);doc.text(title,15,y);doc.line(15,y+2,195,y+2);return y+8}
+async function generatePDF(){
+$("status").textContent="Membuat PDF...";
+if(!window.jspdf){$("status").textContent="Generator PDF belum termuat. Buka saat internet aktif.";return}
+try{
+const {jsPDF}=window.jspdf,doc=new jsPDF({unit:"mm",format:"a4"});let y=18,w=180;
+doc.setFont("helvetica","bold");doc.setFontSize(18);doc.text($("name").value||"NAMA LENGKAP",15,y);y+=5;
+doc.setFont("helvetica","normal");doc.setFontSize(8);doc.text([$("city").value,$("phone").value,$("email").value].filter(Boolean).join(" | "),15,y);y+=8;
+y=sec(doc,"RINGKASAN PROFESIONAL",y);y=wrap(doc,$("summary").value,15,y,w)+3;
+y=sec(doc,"PENGALAMAN KERJA",y);
+for(const j of jobs){if(!(j.company||j.role||j.desc))continue;doc.setFont("helvetica","bold");doc.setFontSize(8.5);doc.text(j.company||"",15,y);doc.setFont("helvetica","normal");doc.setFontSize(7.5);doc.text(j.date||"",195,y,{align:"right"});y+=4;doc.setFont("helvetica","bold");doc.setFontSize(8);doc.text(j.role||"",15,y);y+=4;y=wrap(doc,j.desc,15,y,w,8,4)+3;if(y>278){doc.addPage();y=18}}
+y=sec(doc,"PENDIDIKAN",y);
+for(const e of education){if(!(e.school||e.major||e.note))continue;doc.setFont("helvetica","bold");doc.setFontSize(8.5);doc.text(e.school||"",15,y);doc.setFont("helvetica","normal");doc.setFontSize(7.5);doc.text(e.date||"",195,y,{align:"right"});y+=4;doc.setFont("helvetica","bold");doc.setFontSize(8);doc.text(e.major||"",15,y);y+=4;y=wrap(doc,e.note,15,y,w,8,4)+3;if(y>278){doc.addPage();y=18}}
+y=sec(doc,"KEAHLIAN & KOMPETENSI",y);
+for(const s of $("skills").value.split("\n"))if(s.trim()){y=wrap(doc,s,15,y,w,8,4)+1;if(y>278){doc.addPage();y=18}}
+let fn=(($("name").value||"CV").replace(/[^A-Za-z0-9_-]+/g,"_")||"CV")+"_CV.pdf";doc.save(fn);$("status").textContent="PDF berhasil dibuat. Buka menu Download/Files di iPhone.";
+}catch(e){$("status").textContent="Gagal membuat PDF: "+e.message}}
+document.querySelectorAll("input,textarea").forEach(x=>x.addEventListener("input",render));addJob();addEdu();render();
+if("serviceWorker" in navigator) window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js"));
+</script>
+</body></html>
